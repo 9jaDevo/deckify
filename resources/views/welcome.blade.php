@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 </head>
 <body class="bg-bg-base text-text-primary font-sans antialiased selection:bg-primary selection:text-bg-base overflow-x-hidden">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full z-50 flex justify-center pt-6 px-6">
-        <div class="max-w-7xl w-full glass-dark rounded-full px-6 py-3 flex items-center justify-between border border-white/5 shadow-2xl">
+    <nav x-data="{ scrolled: false }" 
+         @scroll.window="scrolled = (window.pageYOffset > 20)"
+         :class="scrolled ? 'bg-black/40 backdrop-blur-2xl border-white/5' : 'bg-transparent border-transparent'"
+         class="fixed top-0 left-0 w-full z-50 border-b transition-all duration-500">
+        <div class="max-w-[85rem] mx-auto px-6 py-4 flex items-center justify-between relative">
             <!-- Logo -->
             <div class="flex items-center gap-3 group cursor-pointer">
                 <div class="w-10 h-10 rounded-xl bg-bg-base/50 flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-all">
@@ -25,7 +28,7 @@
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden md:flex items-center gap-10">
+            <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 @foreach(['About' => '#about', 'Features' => '#features', 'Pricing' => '#pricing'] as $label => $link)
                     <a href="{{ $link }}" class="text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted hover:text-primary transition-all duration-300">
                         {{ $label }}
@@ -48,55 +51,62 @@
         </div>
     </nav>
 
-    <!-- Moving Liquid Background -->
-    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        <div class="bg-liquid-glow w-[600px] h-[600px] bg-primary/10 -top-20 -left-20 animate-liquid-slow"></div>
-        <div class="bg-liquid-glow w-[800px] h-[800px] bg-primary/5 -bottom-40 -right-20 animate-liquid-medium"></div>
-        <div class="bg-liquid-glow w-[500px] h-[500px] bg-secondary/10 top-1/4 left-1/2 animate-liquid-slow" style="animation-delay: -7s;"></div>
-    </div>
-
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 px-6">
+    <section class="relative min-h-[90vh] overflow-hidden" style="background-color: #050E09;"
+        x-data
+        x-init="if (window.initPlasma) window.initPlasma($el, { color: '#9CA3AF', speed: 0.4, opacity: 0.35 })">
         
-        <div class="max-w-5xl w-full text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted">#1 AI Presentation Workflow</span>
-            </div>
-            <h1 class="text-6xl md:text-[5.5rem] font-serif text-white leading-[1.05] mb-12 tracking-tighter">
-                Transform raw <span class="italic text-primary">intelligence</span><br>into impact
-            </h1>
-            
-            <!-- Generation Input Card (Liquid Glass) -->
-            <div class="max-w-3xl mx-auto rounded-[2.5rem] p-1 bg-gradient-to-b from-white/10 to-white/0 border border-white/10 shadow-[0_32px_120px_rgba(0,0,0,0.6)] group relative">
-                <div class="absolute inset-0 bg-primary/5 rounded-[2.5rem] opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
+        <!-- Content (above WebGL canvas) -->
+        <div class="relative z-20 pointer-events-none flex flex-col items-center justify-center min-h-[90vh] pt-32 px-6">
+            <div class="max-w-5xl w-full text-center">
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md mb-8 pointer-events-auto">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted">#1 AI Presentation Workflow</span>
+                </div>
+                <h1 class="text-6xl md:text-[5.5rem] font-serif text-white leading-[1.05] mb-12 tracking-tighter">
+                    Transform raw <span class="italic text-primary">intelligence</span><br>into 
+                    <span class="relative inline-block">
+                        impact
+                        <svg class="absolute -bottom-2 md:-bottom-3 left-0 w-full h-[18px] md:h-[22px] text-primary pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.5 15C25.5 8 75.5 4 97.5 13" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </h1>
                 
-                <div class="bg-black/40 backdrop-blur-[40px] rounded-[2.4rem] p-6">
-                    <textarea 
-                        placeholder="Type your content here..." 
-                        class="w-full h-32 bg-transparent text-text-primary border-none focus:ring-0 placeholder:text-text-muted/50 resize-none text-xl p-4 scrollbar-custom"
-                    ></textarea>
+                <!-- Generation Input Card (Liquid Glass) -->
+                <div class="max-w-3xl mx-auto rounded-[2.5rem] p-1 bg-gradient-to-b from-white/10 to-white/0 border border-white/10 shadow-[0_32px_120px_rgba(0,0,0,0.6)] group relative pointer-events-auto">
+                    <div class="absolute inset-0 bg-primary/5 rounded-[2.5rem] opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
+                    
+                    <div class="bg-black/40 backdrop-blur-[40px] rounded-[2.4rem] p-6">
+                        <textarea 
+                            placeholder="Type your content here..." 
+                            class="w-full h-32 bg-transparent text-text-primary border-none focus:ring-0 placeholder:text-text-muted/50 resize-none text-xl p-4 scrollbar-custom"
+                        ></textarea>
 
-                    <div class="flex items-center justify-between p-2 bg-white/[0.03] backdrop-blur-md rounded-3xl border border-white/5 mt-4">
-                        <button class="flex items-center gap-3 text-sm font-medium text-text-muted hover:text-white transition-all pl-6 group/btn">
-                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/btn:bg-white/10 transition-all">
+                        <div class="flex items-center justify-between p-2 bg-white/[0.03] backdrop-blur-md rounded-3xl border border-white/5 mt-4">
+                            <button class="flex items-center gap-3 text-sm font-medium text-text-muted hover:text-white transition-all pl-6 group/btn">
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/btn:bg-white/10 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </div>
+                                Upload Documents
+                            </button>
+                            
+                            <button class="px-8 py-3.5 bg-primary text-bg-base font-bold rounded-[1.25rem] hover:scale-[1.02] active:scale-[0.98] transition-all btn-primary-glow flex items-center gap-2">
+                                <span>New Presentation</span>
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
-                            </div>
-                            Upload Documents
-                        </button>
-                        
-                        <button class="px-8 py-3.5 bg-primary text-bg-base font-bold rounded-[1.25rem] hover:scale-[1.02] active:scale-[0.98] transition-all btn-primary-glow flex items-center gap-2">
-                            <span>New Presentation</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </button>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Bottom Gradient Mask for Smooth Transition -->
+        <div class="absolute bottom-0 left-0 w-full h-48 bg-linear-to-t from-bg-base to-transparent z-10 pointer-events-none"></div>
     </section>
 
     <!-- How It Works Section -->

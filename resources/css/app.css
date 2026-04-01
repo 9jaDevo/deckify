@@ -1,8 +1,6 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 :root {
     --primary: #00FF94;
@@ -41,45 +39,65 @@ body {
     background: rgba(255, 255, 255, 0.15);
 }
 
-@layer utilities {
-    @keyframes move-slow {
-        0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-        33% { transform: translateY(-30px) translateX(20px) scale(1.1); }
-        66% { transform: translateY(20px) translateX(-20px) scale(0.9); }
-    }
-    @keyframes move-medium {
-        0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-        50% { transform: translateY(40px) translateX(-30px) scale(1.2); }
-    }
-    .animate-liquid-slow {
-        animation: move-slow 15s ease-in-out infinite;
-    }
-    .animate-liquid-medium {
-        animation: move-medium 10s ease-in-out infinite;
-    }
-    .bg-liquid-glow {
-        @apply absolute rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none;
-    }
-    .text-glow {
-        text-shadow: 0 0 10px rgba(0, 255, 148, 0.4);
-    }
-    /* existing utilities */
-    .glass {
-        @apply bg-white/5 backdrop-blur-xl border border-white/10;
-    }
-    .glass-dark {
-        @apply bg-black/20 backdrop-blur-2xl border border-white/5;
-    }
-    .btn-primary-glow {
-        @apply relative overflow-hidden shadow-[0_0_20px_rgba(0,255,148,0.2)] hover:shadow-[0_0_30px_rgba(0,255,148,0.4)] transition-all duration-300;
-    }
-    .scrollbar-custom::-webkit-scrollbar {
-        @apply w-1.5;
-    }
-    .scrollbar-custom::-webkit-scrollbar-track {
-        @apply bg-transparent;
-    }
-    .scrollbar-custom::-webkit-scrollbar-thumb {
-        @apply bg-white/10 rounded-full hover:bg-white/20 transition-all;
-    }
+/* Animations */
+@keyframes move-slow {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+    33% { transform: translateY(-30px) translateX(20px) scale(1.1); }
+    66% { transform: translateY(20px) translateX(-20px) scale(0.9); }
+}
+@keyframes move-medium {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+    50% { transform: translateY(40px) translateX(-30px) scale(1.2); }
+}
+
+.animate-liquid-slow {
+    animation: move-slow 15s ease-in-out infinite;
+}
+.animate-liquid-medium {
+    animation: move-medium 10s ease-in-out infinite;
+}
+.bg-liquid-glow {
+    position: absolute;
+    border-radius: 9999px;
+    mix-blend-mode: screen;
+    filter: blur(100px);
+    opacity: 0.2;
+    pointer-events: none;
+}
+.text-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 148, 0.4);
+}
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.glass-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(48px);
+    -webkit-backdrop-filter: blur(48px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.btn-primary-glow {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 148, 0.2);
+    transition: all 0.3s;
+}
+.btn-primary-glow:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 148, 0.4);
+}
+.scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+}
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
