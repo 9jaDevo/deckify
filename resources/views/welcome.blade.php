@@ -15,7 +15,7 @@
 <body class="bg-bg-base text-text-primary font-sans antialiased selection:bg-primary selection:text-bg-base overflow-x-hidden">
     <!-- Navbar -->
     <nav x-data="{ scrolled: false }" 
-         @scroll.window="scrolled = (window.pageYOffset > 20)"
+         @scroll.window.throttle.16ms="scrolled = (window.pageYOffset > 20)"
          :class="scrolled ? 'bg-black/40 backdrop-blur-2xl border-white/5' : 'bg-transparent border-transparent'"
          class="fixed top-0 left-0 w-full z-50 border-b transition-all duration-500">
         <div class="max-w-[85rem] mx-auto px-6 py-4 flex items-center justify-between relative">
