@@ -1,86 +1,81 @@
 # Deckify
 
-Deckify is a Laravel application that helps users convert text content into presentation-ready output using AI providers (OpenAI or Grok), then export results as PDF.
+Deckify is a Laravel app that turns user content into presentation-ready output with AI.
 
-This repository is currently focused on an MVP for a competition.
+This repo is scoped for a competition MVP: ship a polished core flow quickly, then expand.
 
-## MVP Scope
+## Product Direction
 
-1. User authentication (register, login, profile)
-2. Landing page with subscription plans
-3. Content input
-	- Paste text
-	- Upload Word document (DOCX)
-4. AI generation pipeline
-	- Provider selection: OpenAI or Grok
-	- Prompt and response normalization
-5. Download output as PDF
-6. Generation history for logged-in users
+Deckify has three core product surfaces:
 
-## Subscription Model
+1. Public landing page (marketing + conversion)
+2. Authenticated dashboard/library (saved decks and history)
+3. Presentation workspace/editor (editing generated content)
 
-Deckify has 3 subscription levels on the landing page:
+## Competition MVP (In Scope)
+
+1. Landing page with:
+	- Hero, how-it-works, features, testimonials, pricing, final CTA, footer
+	- Input options in hero: paste text or upload DOCX
+	- Three plan cards: Free, Pro, Team
+2. Authentication:
+	- Register, login, logout, profile
+3. New presentation creation:
+	- Text input and DOCX upload
+	- Choose AI provider (OpenAI or Grok)
+4. Generation pipeline:
+	- Normalize input and call selected AI provider
+	- Save generated result to database
+5. Dashboard/history:
+	- List user generations
+	- Open a generation detail page
+6. Export:
+	- Download generated result as PDF
+7. Basic plan gating:
+	- Store user plan (`free`, `pro`, `team`)
+	- Enforce simple generation limits per plan
+
+## Post-MVP (Out of Scope for Competition)
+
+1. Browser extension capture flow
+2. Full Figma-level slide editor with complex drag-drop design tools
+3. Real-time collaboration and comments
+4. Billing automation and payment gateway integration
+5. PPTX export and advanced template marketplace
+
+## Subscription Model (MVP)
 
 1. Free
-	- Basic generation limits
-	- Standard processing queue
+	- Lowest generation quota
 2. Pro (Paid)
-	- Higher generation limits
-	- Faster processing
-	- Priority support
+	- Higher generation quota
 3. Team (Paid)
-	- Highest generation limits
-	- Team-focused usage
-	- Premium support
+	- Highest generation quota
+
+For MVP, pricing display is required on landing page. Payment collection can be mocked or deferred.
 
 ## Tech Stack
 
-1. Backend: Laravel 13
-2. Database: MySQL
-3. Auth scaffold: Laravel Breeze (Blade)
-4. Frontend assets: Vite
+1. Laravel 13
+2. MySQL
+3. Laravel Breeze (Blade)
+4. Vite
 
 ## Local Setup
-
-1. Install dependencies
 
 ```bash
 composer install
 npm install
-```
-
-2. Configure environment
-
-```bash
 cp .env.example .env
 php artisan key:generate
-```
-
-3. Ensure MySQL database exists (default name: deckify)
-
-4. Run migrations
-
-```bash
 php artisan migrate
-```
-
-5. Build assets and start server
-
-```bash
 npm run build
 php artisan serve
 ```
 
-## Project Notes
+Ensure a MySQL database named `deckify` exists (or update `.env` values).
 
-Planning and implementation notes are available in:
+## Implementation Notes
 
-1. docs/instructions/mvp-competition-plan.md
-2. docs/skills/README.md
-
-## Next Build Targets
-
-1. Landing page UI and pricing cards for Free, Pro, and Team plans
-2. Usage limits and feature gating by subscription level
-3. Word ingestion and AI generation flow
-4. PDF export endpoint and generation history pages
+1. MVP plan: docs/instructions/mvp-competition-plan.md
+2. Skills and done criteria: docs/skills/README.md
