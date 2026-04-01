@@ -67,7 +67,17 @@
                                     <div class="rounded-lg border border-gray-200 p-4">
                                         <div class="flex items-center justify-between">
                                             <p class="font-medium text-gray-900">{{ $generation->title }}</p>
-                                            <span class="text-xs uppercase tracking-wide text-gray-500">{{ $generation->status }}</span>
+                                            @php
+                                                $statusColors = [
+                                                    'draft' => 'bg-gray-100 text-gray-700',
+                                                    'processing' => 'bg-blue-100 text-blue-700',
+                                                    'completed' => 'bg-green-100 text-green-700',
+                                                    'failed' => 'bg-red-100 text-red-700',
+                                                ];
+
+                                                $statusColor = $statusColors[$generation->status] ?? $statusColors['draft'];
+                                            @endphp
+                                            <span class="text-xs uppercase tracking-wide px-2 py-1 rounded {{ $statusColor }}">{{ $generation->status }}</span>
                                         </div>
                                         <div class="mt-2 text-sm text-gray-600 space-x-2">
                                             <span>Source: {{ strtoupper($generation->source_type) }}</span>
@@ -76,6 +86,10 @@
                                             <span>•</span>
                                             <span>{{ $generation->created_at->diffForHumans() }}</span>
                                         </div>
+
+                                        @if ($generation->status === 'failed' && filled($generation->failed_reason))
+                                            <p class="mt-3 text-sm text-red-700">{{ $generation->failed_reason }}</p>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

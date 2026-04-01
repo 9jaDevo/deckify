@@ -36,11 +36,11 @@ This is the execution checklist page for the MVP.
 
 ## Phase 4: AI Provider Orchestration (OpenAI First, then Grok)
 
-- [ ] AI provider interface created.
-- [ ] OpenAI provider implementation connected.
-- [ ] Grok provider implementation connected.
-- [ ] Generation output normalized into internal schema.
-- [ ] API error handling and user feedback added.
+- [x] AI provider interface created.
+- [x] OpenAI provider implementation connected.
+- [x] Grok provider implementation connected.
+- [x] Generation output normalized into internal schema.
+- [x] API error handling and user feedback added.
 
 ## Phase 5: Workspace MVP-lite Editing Flow
 

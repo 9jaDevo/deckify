@@ -16,9 +16,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'input_text',
     'output_payload',
     'speaker_notes',
+    'failed_reason',
 ])]
 class Generation extends Model
 {
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'output_payload' => 'array',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

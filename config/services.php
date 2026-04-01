@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+        'model' => env('OPENAI_MODEL', 'gpt-4o-mini'),
+        'base_url' => env('OPENAI_BASE_URL', 'https://api.openai.com/v1'),
+    ],
+
+    'grok' => [
+        'api_key' => env('GROK_API_KEY'),
+        'model' => env('GROK_MODEL', 'grok-2-latest'),
+        'base_url' => env('GROK_BASE_URL', 'https://api.x.ai/v1'),
+    ],
+
 ];

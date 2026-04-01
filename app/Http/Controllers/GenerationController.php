@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGenerationRequest;
 use App\Models\Generation;
+use App\Services\AI\GenerationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class GenerationController extends Controller
 {
@@ -21,19 +24,9 @@ class GenerationController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreGenerationRequest $request, GenerationService $generationService): RedirectResponse
     {
-        $validated = $request->validate([
-            'source_text' => ['nullable', 'string'],
-            'source_file' => ['nullable', 'file', 'mimes:doc,docx', 'max:10240'],
-            'provider' => ['required', 'in:openai,grok'],
-        ]);
-
-        if (empty($validated['source_text']) && ! $request->hasFile('source_file')) {
-            return back()
-                ->withErrors(['source_text' => 'Provide text or upload a DOCX file.'])
-                ->withInput();
-        }
+        $validated = $request->validated();
 
         $sourceType = $request->hasFile('source_file') ? 'docx' : 'text';
         $sourceFilePath = $request->hasFile('source_file')
@@ -44,7 +37,7 @@ class GenerationController extends Controller
             ? pathinfo($request->file('source_file')->getClientOriginalName(), PATHINFO_FILENAME)
             : str((string) $validated['source_text'])->limit(50)->toString();
 
-        Generation::create([
+        $generation = Generation::create([
             'user_id' => $request->user()->id,
             'title' => $title ?: 'Untitled generation',
             'source_type' => $sourceType,
@@ -54,8 +47,21 @@ class GenerationController extends Controller
             'input_text' => $validated['source_text'] ?? null,
         ]);
 
+        try {
+            $generationService->dispatch($generation);
+        } catch (Throwable) {
+            $generation->update([
+                'status' => 'failed',
+                'failed_reason' => 'Could not queue generation. Please try again.',
+            ]);
+
+            return redirect()
+                ->route('dashboard')
+                ->with('status', 'Generation could not be queued. Please retry.');
+        }
+
         return redirect()
             ->route('dashboard')
-            ->with('status', 'Generation source saved. AI processing will be connected in the next phase.');
+            ->with('status', 'Generation queued. AI processing has started.');
     }
 }
