@@ -8,15 +8,39 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @if (session('status'))
-                <div class="mb-4 p-4 rounded-lg bg-green-100 text-green-800">
+                @php
+                    $statusType = session('status_type', 'success');
+                    $statusClasses = $statusType === 'error'
+                        ? 'bg-red-100 text-red-800'
+                        : 'bg-green-100 text-green-800';
+                @endphp
+                <div class="mb-4 p-4 rounded-lg {{ $statusClasses }}">
                     {{ session('status') }}
                 </div>
             @endif
+
+            @error('plan_limit')
+                <div class="mb-4 p-4 rounded-lg bg-red-100 text-red-800">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <div class="grid gap-6 lg:grid-cols-3">
                 <div class="lg:col-span-1 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         <h3 class="text-lg font-semibold mb-4">New Presentation</h3>
+
+                        <div class="mb-4 rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700">
+                            <p class="font-medium">Plan: {{ $planName }}</p>
+                            <p>Usage this month: {{ $usageCount }} / {{ $usageLimit }}</p>
+                            <p>Remaining: {{ $remainingCount }}</p>
+                        </div>
+
+                        @if ($isLimitReached)
+                            <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                                Monthly limit reached for your current plan. Upgrade your plan or wait for the next monthly cycle.
+                            </div>
+                        @endif
 
                         <form method="POST" action="{{ route('generations.store') }}" enctype="multipart/form-data" class="space-y-4">
                             @csrf
@@ -52,7 +76,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent bg-gray-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800">
+                            <button type="submit" @disabled($isLimitReached) class="w-full inline-flex justify-center rounded-md border border-transparent bg-gray-900 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60">
                                 Save Generation Source
                             </button>
                         </form>
@@ -89,6 +113,17 @@
                                             <span>Provider: {{ strtoupper($generation->provider) }}</span>
                                             <span>•</span>
                                             <span>{{ $generation->created_at->diffForHumans() }}</span>
+                                        </div>
+
+                                        @if ($generation->status === 'processing')
+                                            <p class="mt-2 text-sm text-blue-700">AI is generating slides for this deck. Refresh shortly to see the latest state.</p>
+                                        @endif
+
+                                        <div class="mt-3 flex items-center gap-3 text-sm">
+                                            <a href="{{ route('generations.show', $generation) }}" class="font-medium text-indigo-700 hover:text-indigo-800">Open Workspace</a>
+                                            @if ($generation->status === 'completed')
+                                                <a href="{{ route('generations.export', $generation) }}" class="font-medium text-gray-800 hover:text-gray-900">Export PDF</a>
+                                            @endif
                                         </div>
 
                                         @if ($generation->status === 'failed' && filled($generation->failed_reason))

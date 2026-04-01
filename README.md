@@ -54,6 +54,28 @@ Deckify has three core product surfaces:
 
 For MVP, pricing display is required on landing page. Payment collection can be mocked or deferred.
 
+## Plan Limits and Usage
+
+Deckify enforces monthly generation limits by plan:
+
+1. Free: `DECKIFY_LIMIT_FREE`
+2. Pro: `DECKIFY_LIMIT_PRO`
+3. Team: `DECKIFY_LIMIT_TEAM`
+
+Configure these values in `.env` (defaults are set in `.env.example`).
+
+The dashboard shows plan name, monthly usage, remaining allowance, and a clear over-limit message when quota is exhausted.
+
+## Workspace and Export
+
+1. Open any generation from dashboard with **Open Workspace**.
+2. Edit active slide content and per-slide speaker notes.
+3. Use prompt refinement for active slide updates.
+4. Export completed generations as PDF from workspace or dashboard.
+
+Demo script: `docs/instructions/demo-script.md`
+Responsive QA checklist: `docs/instructions/responsive-qa-checklist.md`
+
 ## Tech Stack
 
 1. Laravel 13

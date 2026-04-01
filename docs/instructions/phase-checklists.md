@@ -44,32 +44,32 @@ This is the execution checklist page for the MVP.
 
 ## Phase 5: Workspace MVP-lite Editing Flow
 
-- [ ] Generation detail/workspace page exists.
-- [ ] Slide list panel is shown.
-- [ ] Current slide editable area is shown.
-- [ ] Prompt bar updates the active slide.
-- [ ] Speaker notes can be edited and saved.
-- [ ] Back-to-dashboard flow works.
+- [x] Generation detail/workspace page exists.
+- [x] Slide list panel is shown.
+- [x] Current slide editable area is shown.
+- [x] Prompt bar updates the active slide.
+- [x] Speaker notes can be edited and saved.
+- [x] Back-to-dashboard flow works.
 
 ## Phase 6: PDF Export
 
-- [ ] Export endpoint implemented.
-- [ ] Export button available in workspace.
-- [ ] PDF contains generated content and notes.
-- [ ] Exported filename is readable and consistent.
+- [x] Export endpoint implemented.
+- [x] Export button available in workspace.
+- [x] PDF contains generated content and notes.
+- [x] Exported filename is readable and consistent.
 
 ## Phase 7: Subscription Limit Enforcement
 
-- [ ] Free plan limit enforced.
-- [ ] Pro plan higher limit enforced.
-- [ ] Team plan highest limit enforced.
-- [ ] Usage indicator appears on dashboard.
-- [ ] Over-limit message is clear and actionable.
+- [x] Free plan limit enforced.
+- [x] Pro plan higher limit enforced.
+- [x] Team plan highest limit enforced.
+- [x] Usage indicator appears on dashboard.
+- [x] Over-limit message is clear and actionable.
 
 ## Phase 8: Stabilization and End-to-End Signoff
 
-- [ ] Loading, success, and error states polished.
-- [ ] End-to-end flow passes (landing -> auth -> create -> generate -> edit -> export).
-- [ ] Responsive QA completed.
-- [ ] Demo script prepared.
-- [ ] Docs updated to final MVP state.
+- [x] Loading, success, and error states polished.
+- [x] End-to-end flow passes (landing -> auth -> create -> generate -> edit -> export).
+- [x] Responsive QA completed.
+- [x] Demo script prepared.
+- [x] Docs updated to final MVP state.
