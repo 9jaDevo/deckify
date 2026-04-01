@@ -3,6 +3,7 @@
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', function () {
     return view('welcome');

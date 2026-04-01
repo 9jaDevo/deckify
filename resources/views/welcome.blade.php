@@ -48,36 +48,52 @@
         </div>
     </nav>
 
+    <!-- Moving Liquid Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        <div class="bg-liquid-glow w-[600px] h-[600px] bg-primary/10 -top-20 -left-20 animate-liquid-slow"></div>
+        <div class="bg-liquid-glow w-[800px] h-[800px] bg-primary/5 -bottom-40 -right-20 animate-liquid-medium"></div>
+        <div class="bg-liquid-glow w-[500px] h-[500px] bg-secondary/10 top-1/4 left-1/2 animate-liquid-slow" style="animation-delay: -7s;"></div>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 px-6">
-        <!-- Background Blurs -->
-        <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] pointer-events-none opacity-50"></div>
         
         <div class="max-w-5xl w-full text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-md mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted">#1 AI Presentation Workflow</span>
+            </div>
             <h1 class="text-6xl md:text-[5.5rem] font-serif text-white leading-[1.05] mb-12 tracking-tighter">
                 Transform raw <span class="italic text-primary">intelligence</span><br>into impact
             </h1>
             
-            <!-- Generation Input Card -->
-            <div class="max-w-4xl mx-auto p-3 rounded-[2.5rem] bg-bg-surface border border-border-muted shadow-[0_24px_80px_rgba(0,0,0,0.4)] relative group">
-                <div class="absolute inset-0 bg-primary/5 opacity-0 group-focus-within:opacity-100 transition-opacity rounded-[2.5rem] pointer-events-none"></div>
+            <!-- Generation Input Card (Liquid Glass) -->
+            <div class="max-w-3xl mx-auto rounded-[2.5rem] p-1 bg-gradient-to-b from-white/10 to-white/0 border border-white/10 shadow-[0_32px_120px_rgba(0,0,0,0.6)] group relative">
+                <div class="absolute inset-0 bg-primary/5 rounded-[2.5rem] opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
                 
-                <textarea 
-                    placeholder="Type your content here..." 
-                    class="w-full h-44 bg-transparent text-text-primary border-none focus:ring-0 placeholder:text-text-muted resize-none text-xl p-8 pb-4"
-                ></textarea>
+                <div class="bg-black/40 backdrop-blur-[40px] rounded-[2.4rem] p-6">
+                    <textarea 
+                        placeholder="Type your content here..." 
+                        class="w-full h-32 bg-transparent text-text-primary border-none focus:ring-0 placeholder:text-text-muted/50 resize-none text-xl p-4 scrollbar-custom"
+                    ></textarea>
 
-                <div class="flex items-center justify-between p-4 bg-bg-base/30 backdrop-blur-sm rounded-[1.75rem] border border-border-muted/50">
-                    <button class="flex items-center gap-3 text-sm font-medium text-text-muted hover:text-white transition-colors pl-6">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                        Upload Documents
-                    </button>
-                    
-                    <button class="px-12 py-4 bg-primary text-bg-base font-bold rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all btn-primary-glow">
-                        New Presentation
-                    </button>
+                    <div class="flex items-center justify-between p-2 bg-white/[0.03] backdrop-blur-md rounded-3xl border border-white/5 mt-4">
+                        <button class="flex items-center gap-3 text-sm font-medium text-text-muted hover:text-white transition-all pl-6 group/btn">
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover/btn:bg-white/10 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
+                            Upload Documents
+                        </button>
+                        
+                        <button class="px-8 py-3.5 bg-primary text-bg-base font-bold rounded-[1.25rem] hover:scale-[1.02] active:scale-[0.98] transition-all btn-primary-glow flex items-center gap-2">
+                            <span>New Presentation</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
