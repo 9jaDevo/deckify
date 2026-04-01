@@ -34,15 +34,24 @@
             <p class="text-[12px] uppercase tracking-[0.12em] text-gray-500 font-semibold">Workspace</p>
             <nav class="mt-4 space-y-1.5">
                 <a href="#" class="flex items-center gap-3 rounded-xl bg-white/[0.08] px-4 py-3 text-sm text-white">
-                    <span class="text-base">🧠</span>
+                    <svg class="w-4 h-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <span class="font-medium">Collections</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-gray-400 hover:bg-white/[0.04] hover:text-gray-200 transition-colors">
-                    <span class="text-base">✨</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2"/>
+                    </svg>
                     <span>Templates</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-gray-400 hover:bg-white/[0.04] hover:text-gray-200 transition-colors">
-                    <span class="text-base">🗑</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                     <span>Trash</span>
                 </a>
             </nav>
@@ -164,32 +173,14 @@
             </section>
 
             @if ($generations->isEmpty())
-                <section class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                    @for ($i = 0; $i < 3; $i++)
-                        <article class="rounded-3xl border border-white/[0.08] bg-[#17181f] p-4">
-                            <div class="h-40 rounded-2xl border border-white/[0.07] bg-[#101116] p-4">
-                                @if ($i === 0)
-                                    <div class="h-2.5 w-1/2 rounded-full bg-gray-500/60"></div>
-                                    <div class="mt-3 h-7 w-full rounded-md bg-white/80"></div>
-                                    <div class="mt-4 h-2 w-2/3 rounded-full bg-gray-600/50"></div>
-                                    <div class="mt-2 h-2 w-4/5 rounded-full bg-gray-700/50"></div>
-                                @elseif ($i === 1)
-                                    <div class="space-y-3 pt-1">
-                                        @for ($r = 0; $r < 4; $r++)
-                                            <div class="h-2 rounded-full bg-gray-600/55"></div>
-                                        @endfor
-                                    </div>
-                                @else
-                                    <div class="h-full flex items-center justify-center rounded-xl bg-[#23242d] border border-white/[0.06]">
-                                        <div class="w-16 h-12 rounded-md bg-gray-500/30"></div>
-                                    </div>
-                                @endif
-                            </div>
-                            <h3 class="mt-4 text-3xl font-semibold text-white">Sample Deck {{ $i + 1 }}</h3>
-                            <p class="mt-1 text-lg text-gray-500">0 Slides - Edited just now</p>
-                            <div class="mt-3 inline-flex rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1 text-xs text-gray-400">Drafting...</div>
-                        </article>
-                    @endfor
+                <section class="rounded-3xl border border-white/[0.08] bg-[#12141a] p-12 text-center">
+                    <div class="mx-auto mb-5 w-14 h-14 rounded-2xl border border-white/[0.1] bg-[#1a1d25] flex items-center justify-center">
+                        <svg class="w-7 h-7 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-white">No presentations yet</h2>
+                    <p class="mt-2 text-base text-gray-400">Create your first deck using the New Presentation button.</p>
                 </section>
             @else
                 <section class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
