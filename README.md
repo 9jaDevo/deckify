@@ -78,4 +78,6 @@ Ensure a MySQL database named `deckify` exists (or update `.env` values).
 ## Implementation Notes
 
 1. MVP plan: docs/instructions/mvp-competition-plan.md
-2. Skills and done criteria: docs/skills/README.md
+2. Phase checklist: docs/instructions/phase-checklists.md
+3. Checklist page route: /planning/phases-checklist
+4. Skills and done criteria: docs/skills/README.md

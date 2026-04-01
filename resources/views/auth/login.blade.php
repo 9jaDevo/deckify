@@ -1,72 +1,54 @@
 <x-guest-layout>
-    <section class="min-h-screen grid lg:grid-cols-2">
-        <div class="relative hidden lg:flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-emerald-400/10 to-black"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_40%_35%,rgba(52,211,153,0.28),transparent_55%)]"></div>
-            <div class="relative z-10 px-12">
-                <p class="text-[86px] leading-[0.88] text-white/90" style="font-family: 'Caveat', cursive;">
-                    We'll make<br>it here.
-                </p>
+    <x-auth-shell
+        :action="route('login')"
+        submit-label="LOGIN"
+        helper-text="Not registered yet?"
+        helper-link-text="Create an account"
+        helper-link-route="register"
+        divider-text="or sign in with Email"
+        left-message="We'll make<br>it here.">
+
+        <x-auth-session-status class="mb-2 text-sm text-emerald-300" :status="session('status')" />
+
+        <div>
+            <label for="email" class="sr-only">Email</label>
+            <div class="relative">
+                <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/55">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75h3a2.25 2.25 0 0 1 2.25 2.25v6a2.25 2.25 0 0 1-2.25 2.25h-13.5A2.25 2.25 0 0 1 3 15V9a2.25 2.25 0 0 1 2.25-2.25h3" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25 12 12l4.5-3.75" />
+                    </svg>
+                </span>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="Enter your username/email" class="w-full rounded-full border border-white/15 bg-emerald-100/10 py-3 pl-11 pr-4 text-sm text-white placeholder:text-white/45 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300/35" />
             </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-red-300" />
         </div>
 
-        <div class="flex items-center justify-center px-6 py-10 sm:px-10 lg:px-16 bg-black">
-            <div class="w-full max-w-md">
-                <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-3xl font-bold text-white mb-9 tracking-tight">
-                    <span class="text-emerald-400">◢</span><span>Deckify</span>
-                </a>
-
-                <x-auth-session-status class="mb-4 text-sm text-emerald-300" :status="session('status')" />
-
-                <a href="#" class="mb-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl border border-white/35 bg-transparent py-3 text-sm font-semibold text-white hover:border-emerald-300 transition">
-                    <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-black font-bold">G</span>
-                    Sign in with Google
-                </a>
-
-                <div class="mb-7 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-white/55">
-                    <span class="h-px flex-1 bg-white/20"></span>
-                    <span>or sign in with Email</span>
-                    <span class="h-px flex-1 bg-white/20"></span>
-                </div>
-
-                <form method="POST" action="{{ route('login') }}" class="space-y-4">
-                    @csrf
-
-                    <div>
-                        <label for="email" class="sr-only">Email</label>
-                        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="Enter your username/email" class="w-full rounded-2xl border border-emerald-100/15 bg-emerald-100/14 px-5 py-3 text-sm text-white placeholder:text-white/45 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300/35" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-red-300" />
-                    </div>
-
-                    <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Enter your password" class="w-full rounded-2xl border border-emerald-100/15 bg-emerald-100/14 px-5 py-3 text-sm text-white placeholder:text-white/45 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300/35" />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm text-red-300" />
-                    </div>
-
-                    <div class="flex items-center justify-between pt-1 text-sm">
-                        <label for="remember_me" class="inline-flex items-center gap-2 text-white/80">
-                            <input id="remember_me" type="checkbox" class="rounded border-white/30 bg-transparent text-emerald-400 focus:ring-emerald-400" name="remember">
-                            <span>Remember</span>
-                        </label>
-
-                        @if (Route::has('password.request'))
-                            <a class="text-emerald-300 hover:text-emerald-200" href="{{ route('password.request') }}">
-                                Forgot password?
-                            </a>
-                        @endif
-                    </div>
-
-                    <button type="submit" class="mt-2 w-full rounded-2xl bg-emerald-300 py-3 text-base font-extrabold tracking-wide text-black transition hover:bg-emerald-200">
-                        LOGIN
-                    </button>
-                </form>
-
-                <p class="mt-7 text-center text-sm text-white/60">
-                    Not registered yet?
-                    <a href="{{ route('register') }}" class="font-semibold text-emerald-300 hover:text-emerald-200">Create an account</a>
-                </p>
+        <div>
+            <label for="password" class="sr-only">Password</label>
+            <div class="relative">
+                <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/55">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V7.875a4.5 4.5 0 1 0-9 0V10.5" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 10.5h13.5A2.25 2.25 0 0 1 21 12.75v6A2.25 2.25 0 0 1 18.75 21H5.25A2.25 2.25 0 0 1 3 18.75v-6A2.25 2.25 0 0 1 5.25 10.5Z" />
+                    </svg>
+                </span>
+                <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Enter your password" class="w-full rounded-full border border-white/15 bg-emerald-100/10 py-3 pl-11 pr-4 text-sm text-white placeholder:text-white/45 focus:border-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300/35" />
             </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm text-red-300" />
         </div>
-    </section>
+
+        <div class="flex items-center justify-between pt-1 text-sm">
+            <label for="remember_me" class="inline-flex items-center gap-2 text-white/80">
+                <input id="remember_me" type="checkbox" class="rounded border-white/30 bg-transparent text-emerald-400 focus:ring-emerald-400" name="remember">
+                <span>Remember</span>
+            </label>
+
+            @if (Route::has('password.request'))
+                <a class="text-emerald-300 transition hover:text-emerald-200" href="{{ route('password.request') }}">
+                    Forgot password?
+                </a>
+            @endif
+        </div>
+    </x-auth-shell>
 </x-guest-layout>

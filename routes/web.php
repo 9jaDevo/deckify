@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/planning/phases-checklist', 'planning.phases-checklist')
+    ->name('planning.phases-checklist');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [GenerationController::class, 'index'])->name('dashboard');
     Route::post('/generations', [GenerationController::class, 'store'])->name('generations.store');

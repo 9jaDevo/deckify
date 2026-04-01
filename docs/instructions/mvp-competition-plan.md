@@ -78,3 +78,7 @@ Note: Exact numbers for limits should be defined in environment/config values fo
 - Collaborative editing
 - Theme templates
 - Analytics dashboard
+
+## Checklist Reference
+- Main phase checklist document: docs/instructions/phase-checklists.md
+- In-app checklist page: /planning/phases-checklist
