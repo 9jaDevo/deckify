@@ -1,0 +1,1 @@
+I want to develop a laravel application called Deckify and what it does is that, it helps users upload there word document or paste a text and once done it will connect with thrid party AI either grok or open ai and once done you will be able to download as pdf and as login user you can have access to history.
