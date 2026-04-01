@@ -23,10 +23,7 @@
     <div class="flex items-center justify-center px-6 py-10 sm:px-10 lg:px-16 bg-black">
         <div class="w-full max-w-[400px]">
             <a href="{{ url('/') }}" class="mb-10 flex flex-col items-center gap-2 text-center text-white">
-                <span class="inline-flex items-center gap-2 text-3xl font-bold tracking-tight">
-                    <span class="text-emerald-300">◢</span>
-                    <span>Deckify</span>
-                </span>
+                <img src="{{ asset('deckify_logo.png') }}" alt="Deckify" class="h-10 w-auto" />
             </a>
 
             @if ($heading)

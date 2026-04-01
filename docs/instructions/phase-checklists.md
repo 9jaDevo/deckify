@@ -4,17 +4,17 @@ This is the execution checklist page for the MVP.
 
 ## Phase 0: Scope Lock and Execution Rules
 
-- [ ] Freeze in-scope MVP features.
-- [ ] Freeze deferred post-MVP features.
-- [ ] Align docs (`README`, MVP plan, skills) with same boundary.
-- [ ] Define phase completion gate process.
+- [x] Freeze in-scope MVP features.
+- [x] Freeze deferred post-MVP features.
+- [x] Align docs (`README`, MVP plan, skills) with same boundary.
+- [x] Define phase completion gate process.
 
 ## Phase 1: Foundation and Auth Baseline
 
-- [ ] Users table includes `plan` default `free`.
-- [ ] Auth flow works: register, login, logout, profile.
-- [ ] Protected dashboard route is enforced.
-- [ ] Seed users available for testing.
+- [x] Users table includes `plan` default `free`.
+- [x] Auth flow works: register, login, logout, profile.
+- [x] Protected dashboard route is enforced.
+- [x] Seed users available for testing.
 
 ## Phase 2: Public Landing Page and Pricing Tiers
 

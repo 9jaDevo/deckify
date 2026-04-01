@@ -10,19 +10,19 @@
                 <article class="rounded-2xl border border-white/12 bg-[#111111] p-5">
                     <h2 class="text-lg font-semibold text-emerald-300">Phase 0: Scope Lock and Execution Rules</h2>
                     <ul class="mt-3 space-y-2 text-sm text-white/80">
-                        <li>- [ ] Freeze MVP boundaries and deferred scope.</li>
-                        <li>- [ ] Align README, instruction, and skills docs.</li>
-                        <li>- [ ] Set phase-completion gate process.</li>
+                        <li>- [x] Freeze MVP boundaries and deferred scope.</li>
+                        <li>- [x] Align README, instruction, and skills docs.</li>
+                        <li>- [x] Set phase-completion gate process.</li>
                     </ul>
                 </article>
 
                 <article class="rounded-2xl border border-white/12 bg-[#111111] p-5">
                     <h2 class="text-lg font-semibold text-emerald-300">Phase 1: Foundation and Auth Baseline</h2>
                     <ul class="mt-3 space-y-2 text-sm text-white/80">
-                        <li>- [ ] Users include subscription plan default free.</li>
-                        <li>- [ ] Register, login, logout, and profile flow work.</li>
-                        <li>- [ ] Dashboard route protected by auth middleware.</li>
-                        <li>- [ ] Seed users available for demo testing.</li>
+                        <li>- [x] Users include subscription plan default free.</li>
+                        <li>- [x] Register, login, logout, and profile flow work.</li>
+                        <li>- [x] Dashboard route protected by auth middleware.</li>
+                        <li>- [x] Seed users available for demo testing.</li>
                     </ul>
                 </article>
 
