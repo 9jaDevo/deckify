@@ -18,6 +18,10 @@
     --warning-primary: #F1C40F;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-base);
     color: var(--text-primary);
