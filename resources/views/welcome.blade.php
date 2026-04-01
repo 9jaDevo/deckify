@@ -64,7 +64,32 @@
                     <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-text-muted">#1 AI Presentation Workflow</span>
                 </div>
                 <h1 class="text-6xl md:text-[5.5rem] font-serif text-white leading-[1.05] mb-12 tracking-tighter">
-                    Transform raw <span class="italic text-primary">intelligence</span><br>into 
+                    Transform raw <span class="italic text-primary" x-data="{
+                        words: ['intelligence', 'docs', 'PDFs', 'MD files', 'Word docs', 'data'],
+                        currentWordIndex: 0,
+                        text: '',
+                        isDeleting: false,
+                        init() { this.type(); },
+                        type() {
+                            const currentWord = this.words[this.currentWordIndex];
+                            this.text = this.isDeleting 
+                                ? currentWord.substring(0, this.text.length - 1) 
+                                : currentWord.substring(0, this.text.length + 1);
+                            
+                            let typeSpeed = this.isDeleting ? 40 : 100;
+                            
+                            if (!this.isDeleting && this.text === currentWord) {
+                                typeSpeed = 2000;
+                                this.isDeleting = true;
+                            } else if (this.isDeleting && this.text === '') {
+                                this.isDeleting = false;
+                                this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+                                typeSpeed = 400;
+                            }
+                            
+                            setTimeout(() => this.type(), typeSpeed);
+                        }
+                    }"><span x-text="text"></span><span class="animate-pulse font-light not-italic ml-1 opacity-70">|</span></span><br>into 
                     <span class="relative inline-block">
                         impact
                         <svg class="absolute -bottom-2 md:-bottom-3 left-0 w-full h-[18px] md:h-[22px] text-primary pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
