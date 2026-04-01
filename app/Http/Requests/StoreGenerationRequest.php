@@ -18,9 +18,23 @@ class StoreGenerationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'source_text' => ['nullable', 'string'],
+            'source_text' => ['nullable', 'string', 'max:50000'],
             'source_file' => ['nullable', 'file', 'mimes:doc,docx', 'max:10240'],
             'provider' => ['required', 'in:openai,grok'],
+        ];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'source_text.max' => 'Text input must be 50,000 characters or fewer.',
+            'source_file.mimes' => 'Upload a DOC or DOCX file only.',
+            'source_file.max' => 'The uploaded file must be 10MB or smaller.',
+            'provider.required' => 'Choose an AI provider to continue.',
+            'provider.in' => 'Selected AI provider is not supported.',
         ];
     }
 

@@ -24,6 +24,7 @@
                             <div>
                                 <label for="source_text" class="block text-sm font-medium text-gray-700">Paste Text</label>
                                 <textarea id="source_text" name="source_text" rows="6" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Paste your content here...">{{ old('source_text') }}</textarea>
+                                <p class="mt-1 text-xs text-gray-500">Paste up to 50,000 characters, or upload a DOC/DOCX file below.</p>
                                 @error('source_text')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
@@ -32,6 +33,7 @@
                             <div>
                                 <label for="source_file" class="block text-sm font-medium text-gray-700">Upload DOCX</label>
                                 <input id="source_file" type="file" name="source_file" accept=".doc,.docx" class="mt-1 block w-full text-sm text-gray-700" />
+                                <p class="mt-1 text-xs text-gray-500">Accepted formats: DOC, DOCX. Maximum size: 10MB.</p>
                                 @error('source_file')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
@@ -40,9 +42,11 @@
                             <div>
                                 <label for="provider" class="block text-sm font-medium text-gray-700">AI Provider</label>
                                 <select id="provider" name="provider" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="" disabled @selected(old('provider') === null)>Select a provider</option>
                                     <option value="openai" @selected(old('provider') === 'openai')>OpenAI</option>
                                     <option value="grok" @selected(old('provider') === 'grok')>Grok</option>
                                 </select>
+                                <p class="mt-1 text-xs text-gray-500">Pick a provider before submitting your generation source.</p>
                                 @error('provider')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror

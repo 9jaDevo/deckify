@@ -28,11 +28,11 @@ This is the execution checklist page for the MVP.
 
 ## Phase 3: New Presentation Intake and Dashboard History
 
-- [ ] New presentation form accepts pasted text.
-- [ ] New presentation form accepts DOCX upload.
-- [ ] Provider selector supports OpenAI and Grok.
-- [ ] Generation metadata is stored.
-- [ ] Dashboard lists user generation history.
+- [x] New presentation form accepts pasted text.
+- [x] New presentation form accepts DOCX upload.
+- [x] Provider selector supports OpenAI and Grok.
+- [x] Generation metadata is stored.
+- [x] Dashboard lists user generation history.
 
 ## Phase 4: AI Provider Orchestration (OpenAI First, then Grok)
 

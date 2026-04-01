@@ -102,4 +102,38 @@ class GeneratePresentationJobTest extends TestCase
             $this->assertSame('OpenAI is not configured. Please contact support.', $generation->failed_reason);
         }
     }
+
+    public function test_job_marks_generation_failed_when_docx_source_is_missing(): void
+    {
+        config()->set('services.grok.api_key', 'test-key');
+
+        $user = User::factory()->create();
+
+        $generation = Generation::create([
+            'user_id' => $user->id,
+            'title' => 'DOCX Draft',
+            'source_type' => 'docx',
+            'source_file_path' => 'generation-sources/missing.docx',
+            'provider' => 'grok',
+            'status' => 'draft',
+            'input_text' => null,
+        ]);
+
+        $job = new GeneratePresentation($generation->id);
+
+        try {
+            $job->handle(
+                app(GenerationService::class),
+                app(DocumentTextExtractor::class),
+                app(ProviderErrorMapper::class),
+            );
+
+            $this->fail('Expected missing DOCX source to fail job.');
+        } catch (Throwable) {
+            $generation->refresh();
+
+            $this->assertSame('failed', $generation->status);
+            $this->assertSame('The uploaded document was not found.', $generation->failed_reason);
+        }
+    }
 }
