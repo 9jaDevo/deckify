@@ -147,6 +147,7 @@ class GenerationIntakeValidationTest extends TestCase
         $response
             ->assertOk()
             ->assertSee('Quarterly Plan')
-           ->assertSee('Draft');
+               ->assertSee('Quarterly Plan')
+               ->assertSee('Drafting');
     }
 }
