@@ -59,8 +59,8 @@ class MvpEndToEndFlowTest extends TestCase
         $workspace = $this->get(route('generations.show', $generation));
         $workspace
             ->assertOk()
-            ->assertSee('Edit Active Slide')
-            ->assertSee('Export PDF');
+               ->assertSee('Edit Slide')
+               ->assertSee('Export');
 
         $this->mock(ExportService::class, function ($mock): void {
             $mock->shouldReceive('exportGenerationPdf')

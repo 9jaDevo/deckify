@@ -21,8 +21,8 @@ class GenerationWorkspaceTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Edit Active Slide')
-            ->assertSee('Back to Dashboard');
+            ->assertSee('Edit Slide')
+            ->assertSee('Back to All Decks');
     }
 
     public function test_non_owner_cannot_view_workspace(): void

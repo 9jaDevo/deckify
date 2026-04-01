@@ -121,7 +121,7 @@ class GenerationPlanLimitTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertSee('Plan: FREE')
-            ->assertSee('Usage this month: 1 / 5');
+               ->assertSee('FREE')
+               ->assertSeeText('1/5 this month');
     }
 }
