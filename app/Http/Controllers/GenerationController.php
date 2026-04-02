@@ -11,6 +11,7 @@ use App\Services\AI\GenerationService;
 use App\Services\AI\SlideRefinementService;
 use App\Services\ExportService;
 use App\Services\PlanLimitService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -102,17 +103,7 @@ class GenerationController extends Controller
 
         $generation->refresh();
 
-        if ($generation->status === 'failed') {
-            return redirect()
-                ->route('dashboard')
-                ->with('status', $generation->failed_reason ?? 'Generation failed unexpectedly.')
-                ->with('status_type', 'error');
-        }
-
-        return redirect()
-            ->route('dashboard')
-            ->with('status', 'Slides generated successfully!')
-            ->with('status_type', 'success');
+        return redirect()->route('generations.progress', $generation);
     }
 
     public function show(Request $request, Generation $generation): View
@@ -202,6 +193,33 @@ class GenerationController extends Controller
                 ->with('status', $mapped['message'])
                 ->with('status_type', 'error');
         }
+    }
+
+    public function progress(Request $request, Generation $generation): View
+    {
+        $this->ensureOwner($request, $generation);
+
+        $slides = $this->slides($generation);
+
+        return view('generations.progress', [
+            'generation' => $generation,
+            'slideCount' => count($slides),
+        ]);
+    }
+
+    public function status(Request $request, Generation $generation): JsonResponse
+    {
+        $this->ensureOwner($request, $generation);
+
+        $slides = $this->slides($generation);
+
+        return response()->json([
+            'status' => $generation->status,
+            'title' => $generation->title,
+            'slide_count' => count($slides),
+            'provider' => $generation->provider,
+            'failed_reason' => $generation->failed_reason,
+        ]);
     }
 
     public function export(Request $request, Generation $generation, ExportService $exportService)

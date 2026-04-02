@@ -31,11 +31,11 @@ class MvpEndToEndFlowTest extends TestCase
             'provider' => 'openai',
         ]);
 
-        $create->assertRedirect(route('dashboard', absolute: false));
-        Queue::assertPushed(GeneratePresentation::class, 1);
-
         /** @var Generation $generation */
         $generation = Generation::query()->latest()->firstOrFail();
+
+        $create->assertRedirect(route('generations.progress', $generation));
+        Queue::assertPushed(GeneratePresentation::class, 1);
 
         $generation->update([
             'status' => 'completed',

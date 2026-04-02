@@ -67,7 +67,8 @@ class GenerationPlanLimitTest extends TestCase
                 'provider' => 'openai',
             ]);
 
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $generation = \App\Models\Generation::query()->latest()->firstOrFail();
+        $response->assertRedirect(route('generations.progress', $generation));
         Queue::assertPushed(GeneratePresentation::class, 1);
     }
 
@@ -96,7 +97,8 @@ class GenerationPlanLimitTest extends TestCase
                 'provider' => 'openai',
             ]);
 
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $generation = \App\Models\Generation::query()->latest()->firstOrFail();
+        $response->assertRedirect(route('generations.progress', $generation));
         Queue::assertPushed(GeneratePresentation::class, 1);
     }
 

@@ -76,7 +76,9 @@ class GenerationIntakeValidationTest extends TestCase
                 'source_file' => UploadedFile::fake()->create('deck.docx', 120),
             ]);
 
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $generation = \App\Models\Generation::query()->latest()->firstOrFail();
+
+        $response->assertRedirect(route('generations.progress', $generation));
 
         $this->assertDatabaseHas('generations', [
             'user_id' => $user->id,

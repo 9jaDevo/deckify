@@ -26,9 +26,9 @@ class GenerationWorkflowTest extends TestCase
                 'provider' => 'openai',
             ]);
 
-        $response
-            ->assertRedirect(route('dashboard', absolute: false))
-            ->assertSessionHas('status', 'Slides generated successfully!');
+        $generation = \App\Models\Generation::query()->latest()->firstOrFail();
+
+        $response->assertRedirect(route('generations.progress', $generation));
 
         $this->assertDatabaseHas('generations', [
             'user_id' => $user->id,

@@ -15,6 +15,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [GenerationController::class, 'index'])->name('dashboard');
     Route::post('/generations', [GenerationController::class, 'store'])->name('generations.store');
     Route::get('/generations/{generation}', [GenerationController::class, 'show'])->name('generations.show');
+    Route::get('/generations/{generation}/progress', [GenerationController::class, 'progress'])->name('generations.progress');
+    Route::get('/generations/{generation}/status', [GenerationController::class, 'status'])->name('generations.status');
     Route::patch('/generations/{generation}/slide', [GenerationController::class, 'updateSlide'])->name('generations.slide.update');
     Route::patch('/generations/{generation}/refine', [GenerationController::class, 'refineSlide'])->name('generations.slide.refine');
     Route::get('/generations/{generation}/export', [GenerationController::class, 'export'])->name('generations.export');
