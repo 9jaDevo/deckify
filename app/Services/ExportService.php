@@ -46,4 +46,3 @@ class ExportService
         return is_array($slides) ? array_values(array_filter($slides, 'is_array')) : [];
     }
 }
-}
