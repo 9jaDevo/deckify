@@ -20,17 +20,17 @@ Instead of directly merging `origin/Landing-Page`, we:
 5. Deleted the temporary integration branch
 
 ### Files Integrated (9 total)
-| File | Changes | Purpose |
-|------|---------|---------|
-| `resources/views/welcome.blade.php` | +831/-0 | Landing page UI |
-| `resources/css/app.css` | +111/-0 | Dark theme styling |
-| `resources/js/plasma.js` | +114/-0 | WebGL animation |
-| `resources/js/app.js` | +7/-0 | Plasma import |
-| `vite.config.js` | +2/-0 | Tailwind v4 plugin |
-| `postcss.config.js` | -1/0 | v4 compatibility |
-| `package.json` | +7/-0 | Dependencies |
-| `package-lock.json` | Not shown | Locked versions |
-| `resources/views/components/logo.blade.php` | +8/-0 | Logo component |
+| File                                        | Changes   | Purpose            |
+| ------------------------------------------- | --------- | ------------------ |
+| `resources/views/welcome.blade.php`         | +831/-0   | Landing page UI    |
+| `resources/css/app.css`                     | +111/-0   | Dark theme styling |
+| `resources/js/plasma.js`                    | +114/-0   | WebGL animation    |
+| `resources/js/app.js`                       | +7/-0     | Plasma import      |
+| `vite.config.js`                            | +2/-0     | Tailwind v4 plugin |
+| `postcss.config.js`                         | -1/0      | v4 compatibility   |
+| `package.json`                              | +7/-0     | Dependencies       |
+| `package-lock.json`                         | Not shown | Locked versions    |
+| `resources/views/components/logo.blade.php` | +8/-0     | Logo component     |
 
 ### Commits Added to Main (4 commits)
 ```
