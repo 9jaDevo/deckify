@@ -15,12 +15,8 @@ class GeneratePresentation implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * @var list<int>
-     */
-    public array $backoff = [10, 30, 60];
-
-    public int $tries = 3;
+    public int $tries = 1;
+    public int $timeout = 120;
 
     public function __construct(public int $generationId)
     {

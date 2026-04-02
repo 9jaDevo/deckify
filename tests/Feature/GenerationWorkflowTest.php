@@ -28,7 +28,7 @@ class GenerationWorkflowTest extends TestCase
 
         $response
             ->assertRedirect(route('dashboard', absolute: false))
-            ->assertSessionHas('status', 'Generation queued. AI processing has started.');
+            ->assertSessionHas('status', 'Slides generated successfully!');
 
         $this->assertDatabaseHas('generations', [
             'user_id' => $user->id,

@@ -80,21 +80,38 @@ class GenerationController extends Controller
 
         try {
             $generationService->dispatch($generation);
-        } catch (Throwable) {
-            $generation->update([
-                'status' => 'failed',
-                'failed_reason' => 'Could not queue generation. Please try again.',
-            ]);
+        } catch (Throwable $e) {
+            $generation->refresh();
+
+            $reason = filled($generation->failed_reason)
+                ? $generation->failed_reason
+                : 'Generation failed. Please try again.';
+
+            if ($generation->status !== 'failed') {
+                $generation->update([
+                    'status' => 'failed',
+                    'failed_reason' => $reason,
+                ]);
+            }
 
             return redirect()
                 ->route('dashboard')
-                ->with('status', 'Generation could not be queued. Please retry.')
+                ->with('status', $reason)
+                ->with('status_type', 'error');
+        }
+
+        $generation->refresh();
+
+        if ($generation->status === 'failed') {
+            return redirect()
+                ->route('dashboard')
+                ->with('status', $generation->failed_reason ?? 'Generation failed unexpectedly.')
                 ->with('status_type', 'error');
         }
 
         return redirect()
             ->route('dashboard')
-            ->with('status', 'Generation queued. AI processing has started.')
+            ->with('status', 'Slides generated successfully!')
             ->with('status_type', 'success');
     }
 

@@ -29,7 +29,7 @@ class OpenAiProvider implements AiProviderInterface
         $response = Http::withToken($apiKey)
             ->acceptJson()
             ->asJson()
-            ->timeout(60)
+            ->timeout(120)
             ->retry(2, 500)
             ->post($baseUrl.'/chat/completions', [
                 'model' => $model,
