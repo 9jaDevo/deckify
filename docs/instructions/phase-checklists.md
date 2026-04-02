@@ -26,12 +26,11 @@ This is the execution checklist page for the MVP.
 - [ ] Final CTA and footer implemented.
 - [ ] Mobile responsive behavior verified.
 
-## Phase 3: New Presentation Intake and Dashboard History
-
-- [x] New presentation form accepts pasted text.
-- [x] New presentation form accepts DOCX upload.
-- [x] Provider selector supports OpenAI and Grok.
-- [x] Generation metadata is stored.
+## Phase 3: New Presentation Intake and Dashboard History 
+- [x] New presentation form accepts pasted text. 
+- [x] New presentation form accepts DOCX upload. 
+- [x] Provider selector supports OpenAI and Grok. 
+- [x] Generation metadata is stored. 
 - [x] Dashboard lists user generation history.
 
 ## Phase 4: AI Provider Orchestration (OpenAI First, then Grok)

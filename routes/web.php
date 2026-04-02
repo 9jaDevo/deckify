@@ -3,6 +3,7 @@
 use App\Http\Controllers\GenerationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PresentationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,5 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::get('/presentations/create', [PresentationController::class, 'create']);
+Route::post('/presentations', [PresentationController::class, 'store'])->name('presentations.store');
+Route::get('/dashboard', [PresentationController::class, 'index'])->name('dashboard');
 
 require __DIR__.'/auth.php';
