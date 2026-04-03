@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Presentation extends Model
 {
     protected $fillable = [
-    'user_id',
-    'input_text',
-    'provider',
-    'output',
-];
-    //
+        'user_id',
+        'input_text',
+        'provider',
+        'output',
+        'metadata',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
+    ];
 }
