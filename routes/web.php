@@ -31,8 +31,6 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/presentations/create', [PresentationController::class, 'create']);
-Route::post('/presentations', [PresentationController::class, 'store'])->name('presentations.store');
-Route::get('/dashboard', [PresentationController::class, 'index'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
